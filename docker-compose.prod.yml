@@ -4,6 +4,8 @@ services:
     platform: linux/amd64
     container_name: finance_mongo_prod
     restart: always
+    ports:
+      - "127.0.0.1:27017:27017"
     volumes:
       - mongo_data_prod:/data/db
     environment:
