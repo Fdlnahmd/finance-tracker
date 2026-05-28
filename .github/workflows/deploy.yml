@@ -26,3 +26,5 @@ jobs:
         run: |
           cd /home/fadlan/finance-tracker
           docker compose -f docker-compose.prod.yml ps
+
+          
