@@ -9,11 +9,15 @@ import Dashboard from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Categories from './pages/Categories';
 import Reminders from './pages/Reminders';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Redirect Root to Dashboard */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -53,7 +57,7 @@ function App() {
         />
 
         {/* Catch all fallback redirection */}
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
