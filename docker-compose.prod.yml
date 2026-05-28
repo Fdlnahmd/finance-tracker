@@ -15,7 +15,9 @@ services:
       - finance_net_prod
 
   backend:
-    image: ghcr.io/${GITHUB_REPOSITORY_LOWER}/backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: finance_backend_prod
     restart: always
     ports:
@@ -31,7 +33,9 @@ services:
       - finance_net_prod
 
   frontend:
-    image: ghcr.io/${GITHUB_REPOSITORY_LOWER}/frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: finance_frontend_prod
     restart: always
     ports:
