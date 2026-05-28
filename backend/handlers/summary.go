@@ -46,6 +46,15 @@ func GetSummary(c *gin.Context) {
 	month, _ := strconv.Atoi(monthStr)
 	year, _ := strconv.Atoi(yearStr)
 
+	// Check memory cache
+	cacheKey := userID.Hex() + "-summary-" + monthStr + "-" + yearStr
+	if cachedData, found := utils.GlobalCache.Get(cacheKey); found {
+		if resp, ok := cachedData.(SummaryResponse); ok {
+			utils.SuccessResponse(c, http.StatusOK, "", resp)
+			return
+		}
+	}
+
 	startDate := time.Date(year, time.Month(month), 1, 0, 0, 0, 0, time.UTC)
 	endDate := startDate.AddDate(0, 1, 0)
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
@@ -96,10 +105,15 @@ func GetSummary(c *gin.Context) {
 		bd = []CategoryBreakdown{}
 	}
 
-	utils.SuccessResponse(c, http.StatusOK, "", SummaryResponse{
+	resp := SummaryResponse{
 		Month: month, Year: year, TotalIncome: totalIncome, TotalExpense: totalExpense,
 		Balance: totalIncome - totalExpense, BreakdownByCategory: bd,
-	})
+	}
+
+	// Save to memory cache for 5 minutes
+	utils.GlobalCache.Set(cacheKey, resp, 5*time.Minute)
+
+	utils.SuccessResponse(c, http.StatusOK, "", resp)
 }
 
 func GetTrend(c *gin.Context) {
@@ -108,6 +122,16 @@ func GetTrend(c *gin.Context) {
 	if months <= 0 || months > 12 {
 		months = 6
 	}
+
+	// Check memory cache
+	cacheKey := userID.Hex() + "-trend-" + strconv.Itoa(months)
+	if cachedData, found := utils.GlobalCache.Get(cacheKey); found {
+		if resp, ok := cachedData.([]TrendItem); ok {
+			utils.SuccessResponse(c, http.StatusOK, "", resp)
+			return
+		}
+	}
+
 	now := time.Now()
 	startDate := time.Date(now.Year(), now.Month()-time.Month(months-1), 1, 0, 0, 0, 0, time.UTC)
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
@@ -151,5 +175,9 @@ func GetTrend(c *gin.Context) {
 		key := strconv.Itoa(d.Year()) + "-" + strconv.Itoa(int(d.Month()))
 		trend = append(trend, *trendMap[key])
 	}
+
+	// Save to memory cache for 5 minutes
+	utils.GlobalCache.Set(cacheKey, trend, 5*time.Minute)
+
 	utils.SuccessResponse(c, http.StatusOK, "", trend)
 }

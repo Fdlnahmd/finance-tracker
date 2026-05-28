@@ -112,6 +112,9 @@ func CreateTransaction(c *gin.Context) {
 		return
 	}
 
+	// Invalidate user cache on transaction creation
+	utils.GlobalCache.ClearUserCache(userID.Hex())
+
 	utils.SuccessResponse(c, http.StatusCreated, "Transaksi berhasil dibuat", transaction)
 }
 
@@ -167,6 +170,9 @@ func UpdateTransaction(c *gin.Context) {
 		return
 	}
 
+	// Invalidate user cache on transaction update
+	utils.GlobalCache.ClearUserCache(userID.Hex())
+
 	utils.SuccessResponse(c, http.StatusOK, "Transaksi berhasil diupdate", nil)
 }
 
@@ -192,6 +198,9 @@ func DeleteTransaction(c *gin.Context) {
 		utils.ErrorResponse(c, http.StatusNotFound, "Transaksi tidak ditemukan")
 		return
 	}
+
+	// Invalidate user cache on transaction deletion
+	utils.GlobalCache.ClearUserCache(userID.Hex())
 
 	utils.SuccessResponse(c, http.StatusOK, "Transaksi berhasil dihapus", nil)
 }

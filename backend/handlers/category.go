@@ -69,6 +69,9 @@ func CreateCategory(c *gin.Context) {
 		return
 	}
 
+	// Invalidate user cache on category creation
+	utils.GlobalCache.ClearUserCache(userID.Hex())
+
 	utils.SuccessResponse(c, http.StatusCreated, "Kategori berhasil dibuat", category)
 }
 
@@ -111,6 +114,9 @@ func UpdateCategory(c *gin.Context) {
 		return
 	}
 
+	// Invalidate user cache on category update
+	utils.GlobalCache.ClearUserCache(userID.Hex())
+
 	utils.SuccessResponse(c, http.StatusOK, "Kategori berhasil diupdate", nil)
 }
 
@@ -150,6 +156,9 @@ func DeleteCategory(c *gin.Context) {
 		utils.ErrorResponse(c, http.StatusNotFound, "Kategori tidak ditemukan")
 		return
 	}
+
+	// Invalidate user cache on category deletion
+	utils.GlobalCache.ClearUserCache(userID.Hex())
 
 	utils.SuccessResponse(c, http.StatusOK, "Kategori berhasil dihapus", nil)
 }
