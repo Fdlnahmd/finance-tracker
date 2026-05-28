@@ -1,0 +1,57 @@
+services:
+  mongodb:
+    image: mongo:7
+    platform: linux/amd64
+    container_name: finance_mongo
+    ports:
+      - "${MONGO_PORT}:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASS}
+    networks:
+      - finance_net
+
+  backend:
+    build: ./backend
+    container_name: finance_backend
+    ports:
+      - "${BACKEND_PORT}:8080"
+    environment:
+      MONGO_URI: mongodb://${MONGO_USER}:${MONGO_PASS}@mongodb:27017
+      MONGO_DB: ${MONGO_DB}
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: "8080"
+    depends_on:
+      - mongodb
+    networks:
+      - finance_net
+
+  frontend:
+    build: ./frontend
+    container_name: finance_frontend
+    ports:
+      - "${FRONTEND_PORT}:80"
+    depends_on:
+      - backend
+    networks:
+      - finance_net
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: finance_tunnel
+    restart: always
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - finance_net
+
+volumes:
+  mongo_data:
+
+networks:
+  finance_net:
+    driver: bridge
