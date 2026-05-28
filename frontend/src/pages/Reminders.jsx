@@ -179,7 +179,7 @@ export default function Reminders() {
             onClick={() => setIsModalOpen(false)}
           />
 
-          <div className="fixed bottom-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-md bg-white dark:bg-gray-800 rounded-t-3xl md:rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 z-50 p-6 max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom md:zoom-in-95 duration-200">
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] md:max-w-md bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 z-50 p-6 md:p-8 max-h-[85vh] overflow-y-auto animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-lg font-extrabold text-gray-900 dark:text-white">
                 {editingRem ? '✏️ Edit Pengingat' : '➕ Pengingat Baru'}
