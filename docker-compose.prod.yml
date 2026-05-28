@@ -5,7 +5,7 @@ services:
     container_name: finance_mongo_prod
     restart: always
     volumes:
-      - mongo_data_prod:/data/db
+      - mongo_data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASS}
@@ -55,7 +55,7 @@ services:
       - finance_net_prod
 
 volumes:
-  mongo_data_prod:
+  mongo_data:
 
 networks:
   finance_net_prod:
