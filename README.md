@@ -147,7 +147,7 @@ MONGO_PORT=27017
 
 # Konfigurasi Backend & Frontend
 PORT=8080
-FRONTEND_PORT=80
+FRONTEND_PORT=8082
 VITE_API_URL=https://<domain-anda.com>
 
 # Token Cloudflare Zero Trust Anda
@@ -209,12 +209,12 @@ Agar aplikasi Anda dapat diakses secara publik dan aman, konfigurasikan **Public
 
 ---
 
-## 🛠️ Workflow CI/CD (GitHub Actions)
+## 🛠️ Workflow CI/CD (Self-Hosted Runner)
 
-Proyek ini dilengkapi dengan otomatisasi CI/CD tingkat lanjut di berkas `.github/workflows/deploy.yml`:
-- **Pemicu**: Setiap kali Anda melakukan `git push` ke cabang utama (`main`).
+Proyek ini dilengkapi dengan pipeline otomatisasi CI/CD modern tanpa menggunakan secrets di berkas `.github/workflows/deploy.yml`:
+- **Pemicu**: Setiap kali Anda melakukan `git push` ke cabang utama (`main`) atau memicunya secara manual lewat tombol **Run workflow** di GitHub.
+- **Arsitektur**: Menggunakan **Self-Hosted GitHub Runner** yang terpasang langsung di VPS Anda.
 - **Proses**:
-  1. Melakukan testing kode.
-  2. Membangun (*build*) image Docker frontend dan backend secara otomatis.
-  3. Mengunggah image hasil kompilasi langsung ke **GitHub Container Registry (GHCR)**.
-  4. Menghubungi server VPS produksi Anda untuk melakukan penarikan ulang (*pull*) image terbaru dan me-restart layanan secara otomatis tanpa waktu henti (*zero-downtime*).
+  1. **Sync latest code**: Runner di VPS otomatis melakukan `git fetch` dan `git reset --hard` untuk menyinkronkan berkas lokal VPS dengan kode terbaru di GitHub.
+  2. **Rebuild & restart**: Runner mengeksekusi pembangunan ulang image kontainer secara lokal di VPS menggunakan perintah `docker compose -p finance-tracker -f docker-compose.prod.yml up -d --build --remove-orphans`.
+  3. **Check status**: Memeriksa status kontainer aktif dan melakukan pembersihan (*prune*) otomatis untuk menghapus sisa image lama (*dangling images*) agar penyimpanan server tetap lega.
