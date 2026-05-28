@@ -191,21 +191,17 @@ Gunakan pengaturan berikut pada Navicat untuk mengakses data MongoDB di dalam ko
 
 ---
 
-## 🛡️ Konfigurasi Cloudflare Zero Trust (Public Hostnames)
+## 🛡️ Konfigurasi Cloudflare Zero Trust (Public Hostname)
 
-Agar aplikasi Anda dapat diakses secara publik dan aman, konfigurasikan **Public Hostnames** di dasbor Cloudflare Zero Trust Anda pada bagian terowongan aktif terkait dengan rute berikut:
+Berkat konfigurasi **Nginx Reverse Proxy** baru kita, setelan di Cloudflare Zero Trust Anda menjadi jauh lebih sederhana! Anda **hanya perlu mendaftarkan satu rute tunggal** saja ke kontainer frontend:
 
-1. **Rute Backend (API)**:
-   - **Domain / Subdomain**: `<subdomain.domain-anda.com>`
-   - **Path**: `api/*`
-   - **Service Type**: `HTTP`
-   - **URL**: `http://backend:8080`
+- **Domain / Subdomain**: `<subdomain.domain-anda.com>` (contoh: `finance-tracker.nexvol.xyz`)
+- **Path**: *(Dikosongkan / default)*
+- **Service Type**: `HTTP`
+- **URL**: `http://frontend:80`
 
-2. **Rute Frontend (Web UI)**:
-   - **Domain / Subdomain**: `<subdomain.domain-anda.com>`
-   - **Path**: *(dikosongkan / default `*`)*
-   - **Service Type**: `HTTP`
-   - **URL**: `http://frontend:80`
+> [!NOTE]
+> Anda tidak perlu lagi mengonfigurasi rute terpisah untuk `api/*`. Nginx di dalam kontainer frontend kini secara otomatis mencegat semua permintaan yang mengarah ke `/api/*` dan meneruskannya ke kontainer backend (`http://backend:8080`) melalui jaringan internal Docker. Ini jauh lebih aman dan efisien!
 
 ---
 
