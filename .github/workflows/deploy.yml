@@ -17,14 +17,16 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
 
-      - name: Rebuild and restart containers
+      - name: Build and restart containers
         run: |
           cd /home/fadlan/finance-tracker
-          docker compose -f docker-compose.prod.yml up -d --build --remove-orphans
+          docker compose -p finance-tracker -f docker-compose.prod.yml up -d --build --remove-orphans
 
       - name: Check containers
         run: |
           cd /home/fadlan/finance-tracker
-          docker compose -f docker-compose.prod.yml ps
+          docker compose -p finance-tracker -f docker-compose.prod.yml ps
 
-          
+      - name: Clean unused Docker images
+        run: |
+          docker image prune -f
