@@ -64,7 +64,7 @@ export default function Register() {
               type="text"
               required
               className="w-full px-4 py-3 rounded-2xl border border-gray-200 dark:border-gray-750 bg-gray-50 dark:bg-gray-900 focus:bg-white dark:focus:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500/25 focus:border-sky-500 transition-all font-semibold"
-              placeholder="Fadlan"
+              placeholder="Nama Anda"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
