@@ -106,15 +106,14 @@ export default function Categories() {
 
   return (
     <PageLayout title="Manajemen Kategori">
-      {/* Top Banner and Add Action */}
-      <div className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-3xl border border-gray-100 dark:border-gray-700/50 shadow-sm mb-6 lg:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-colors">
+      <div className="bg-white dark:bg-realtime-card p-5 md:p-6 rounded-2xl border border-realtime-border dark:border-realtime-darkBorder shadow-sm mb-6 lg:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-colors">
         <div>
-          <h3 className="text-lg font-extrabold text-gray-900 dark:text-white">Kustom Kategori</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Atur emoji, nama, dan warna alokasi kategori Anda</p>
+          <h3 className="text-lg font-extrabold text-realtime-text dark:text-realtime-darkText">Kustom Kategori</h3>
+          <p className="text-xs text-realtime-text/60 dark:text-realtime-darkText/60">Atur emoji, nama, dan warna alokasi kategori Anda</p>
         </div>
         <button
           onClick={handleOpenAdd}
-          className="py-3 px-5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white font-extrabold shadow-lg shadow-sky-500/20 flex items-center justify-center text-sm active:scale-98 transition-all w-full sm:w-auto"
+          className="py-2.5 px-5 rounded-xl bg-primary-500 hover:bg-primary-600 text-white font-semibold shadow-sm flex items-center justify-center text-sm active:scale-[0.99] transition-all w-full sm:w-auto"
         >
           ➕ Kategori Baru
         </button>
@@ -122,24 +121,24 @@ export default function Categories() {
 
       {loading && categories.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 space-y-3">
-          <div className="w-12 h-12 border-4 border-gray-100 dark:border-gray-700 border-t-sky-500 rounded-full animate-spin" />
-          <p className="text-sm text-gray-400 font-bold">Memuat daftar kategori...</p>
+          <div className="w-12 h-12 border-4 border-realtime-border dark:border-realtime-darkBorder border-t-primary-500 rounded-full animate-spin" />
+          <p className="text-sm text-realtime-text/50 dark:text-realtime-darkText/50 font-semibold">Memuat daftar kategori...</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Column 1: Expense Categories */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2.5 pb-2 border-b border-gray-150 dark:border-gray-700">
+            <div className="flex items-center space-x-2.5 pb-2 border-b border-realtime-border dark:border-realtime-darkBorder">
               <span className="text-xl">🔴</span>
-              <h4 className="text-base font-extrabold text-gray-900 dark:text-white">Kategori Pengeluaran ({expenseCategories.length})</h4>
+              <h4 className="text-base font-extrabold text-realtime-text dark:text-realtime-darkText">Kategori Pengeluaran ({expenseCategories.length})</h4>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {expenseCategories.map((cat) => (
                 <div
                   key={cat.id}
-                  className="bg-white dark:bg-gray-800 p-4 rounded-2xl border border-gray-100 dark:border-gray-700/50 shadow-sm flex items-center justify-between hover:scale-101 hover:shadow-md transition-all duration-150"
+                  className="bg-white dark:bg-realtime-card p-4 rounded-2xl border border-realtime-border dark:border-realtime-darkBorder shadow-sm flex items-center justify-between hover:scale-[1.005] hover:shadow-md transition-all duration-150"
                 >
                   <div className="flex items-center space-x-3.5">
                     <div
@@ -149,10 +148,10 @@ export default function Categories() {
                       {cat.icon || '📦'}
                     </div>
                     <div>
-                      <h5 className="text-sm font-bold text-gray-800 dark:text-white flex items-center">
+                      <h5 className="text-sm font-bold text-realtime-text dark:text-realtime-darkText flex items-center">
                         {cat.name}
                         {cat.is_default && (
-                          <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-gray-100 dark:bg-gray-700 text-gray-400">
+                          <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-primary-50 dark:bg-primary-950/40 text-primary-500 dark:text-primary-300 border border-primary-100/35 dark:border-primary-900/30">
                             Bawaan
                           </span>
                         )}
@@ -164,7 +163,7 @@ export default function Categories() {
                     <div className="flex space-x-1">
                       <button
                         onClick={() => handleOpenEdit(cat)}
-                        className="p-1.5 rounded-lg text-xs font-bold text-sky-500 hover:bg-sky-50 dark:hover:bg-sky-950/20"
+                        className="p-1.5 rounded-lg text-xs font-bold text-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/20"
                         title="Edit"
                       >
                         ✏️
@@ -185,16 +184,16 @@ export default function Categories() {
 
           {/* Column 2: Income Categories */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2.5 pb-2 border-b border-gray-150 dark:border-gray-700">
+            <div className="flex items-center space-x-2.5 pb-2 border-b border-realtime-border dark:border-realtime-darkBorder">
               <span className="text-xl">🟢</span>
-              <h4 className="text-base font-extrabold text-gray-900 dark:text-white">Kategori Pemasukan ({incomeCategories.length})</h4>
+              <h4 className="text-base font-extrabold text-realtime-text dark:text-realtime-darkText">Kategori Pemasukan ({incomeCategories.length})</h4>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {incomeCategories.map((cat) => (
                 <div
                   key={cat.id}
-                  className="bg-white dark:bg-gray-800 p-4 rounded-2xl border border-gray-100 dark:border-gray-700/50 shadow-sm flex items-center justify-between hover:scale-101 hover:shadow-md transition-all duration-150"
+                  className="bg-white dark:bg-realtime-card p-4 rounded-2xl border border-realtime-border dark:border-realtime-darkBorder shadow-sm flex items-center justify-between hover:scale-[1.005] hover:shadow-md transition-all duration-150"
                 >
                   <div className="flex items-center space-x-3.5">
                     <div
@@ -204,10 +203,10 @@ export default function Categories() {
                       {cat.icon || '📦'}
                     </div>
                     <div>
-                      <h5 className="text-sm font-bold text-gray-800 dark:text-white flex items-center">
+                      <h5 className="text-sm font-bold text-realtime-text dark:text-realtime-darkText flex items-center">
                         {cat.name}
                         {cat.is_default && (
-                          <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-gray-100 dark:bg-gray-700 text-gray-400">
+                          <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-primary-50 dark:bg-primary-950/40 text-primary-500 dark:text-primary-300 border border-primary-100/35 dark:border-primary-900/30">
                             Bawaan
                           </span>
                         )}
@@ -219,7 +218,7 @@ export default function Categories() {
                     <div className="flex space-x-1">
                       <button
                         onClick={() => handleOpenEdit(cat)}
-                        className="p-1.5 rounded-lg text-xs font-bold text-sky-500 hover:bg-sky-50 dark:hover:bg-sky-950/20"
+                        className="p-1.5 rounded-lg text-xs font-bold text-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/20"
                       >
                         ✏️
                       </button>
@@ -243,18 +242,18 @@ export default function Categories() {
       {isModalOpen && (
         <>
           <div
-            className="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-realtime-text/45 dark:bg-black/60 backdrop-blur-[2px] z-40"
             onClick={() => setIsModalOpen(false)}
           />
 
-          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] md:max-w-md bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 z-50 p-6 md:p-8 max-h-[85vh] overflow-y-auto animate-in zoom-in-95 duration-200">
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] md:max-w-md bg-white dark:bg-realtime-card rounded-2xl shadow-xl border border-realtime-border dark:border-realtime-darkBorder z-50 p-6 md:p-8 max-h-[85vh] overflow-y-auto animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-extrabold text-gray-900 dark:text-white">
+              <h3 className="text-lg font-extrabold text-realtime-text dark:text-realtime-darkText">
                 {editingCat ? '✏️ Edit Kategori' : '➕ Kategori Baru'}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500"
+                className="p-1.5 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 text-realtime-text/60 dark:text-realtime-darkText/60"
               >
                 ❌
               </button>
@@ -269,10 +268,10 @@ export default function Categories() {
             <form onSubmit={handleFormSubmit} className="space-y-4">
               {/* Type Switcher Tab */}
               <div>
-                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1.5">
+                <label className="block text-xs font-bold text-realtime-text/75 dark:text-realtime-darkText/75 mb-1.5 uppercase tracking-wider">
                   Tipe Transaksi
                 </label>
-                <div className="flex bg-gray-100 dark:bg-gray-900 p-1 rounded-xl">
+                <div className="flex bg-primary-50 dark:bg-primary-950/20 border border-primary-100/20 dark:border-primary-900/20 p-1 rounded-xl">
                   <button
                     type="button"
                     disabled={!!editingCat}
@@ -280,7 +279,7 @@ export default function Categories() {
                     className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
                       type === 'expense'
                         ? 'bg-red-500 text-white shadow-sm'
-                        : 'text-gray-500 dark:text-gray-400'
+                        : 'text-realtime-text/60 dark:text-realtime-darkText/60'
                     } disabled:opacity-50`}
                   >
                     Pengeluaran
@@ -292,7 +291,7 @@ export default function Categories() {
                     className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
                       type === 'income'
                         ? 'bg-emerald-500 text-white shadow-sm'
-                        : 'text-gray-500 dark:text-gray-400'
+                        : 'text-realtime-text/60 dark:text-realtime-darkText/60'
                     } disabled:opacity-50`}
                   >
                     Pemasukan
@@ -302,14 +301,14 @@ export default function Categories() {
 
               {/* Name Field */}
               <div>
-                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1.5">
+                <label className="block text-xs font-bold text-realtime-text/75 dark:text-realtime-darkText/75 mb-1.5 uppercase tracking-wider">
                   Nama Kategori
                 </label>
                 <input
                   type="text"
                   required
                   maxLength="25"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500/20 font-bold"
+                  className="w-full px-4 py-2.5 rounded-xl border border-realtime-border dark:border-realtime-darkBorder bg-white dark:bg-realtime-darkBg text-realtime-text dark:text-realtime-darkText placeholder-realtime-text/40 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-semibold text-sm"
                   placeholder="Contoh: Transportasi, Investasi"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -318,17 +317,17 @@ export default function Categories() {
 
               {/* Emoji Icon Grid Selector */}
               <div>
-                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-xs font-bold text-realtime-text/75 dark:text-realtime-darkText/75 mb-2 uppercase tracking-wider">
                   Pilih Emoji ({icon})
                 </label>
-                <div className="grid grid-cols-6 gap-2 bg-gray-55 dark:bg-gray-900 p-3 rounded-2xl max-h-[140px] overflow-y-auto border border-gray-100 dark:border-gray-700">
+                <div className="grid grid-cols-6 gap-2 bg-primary-50/20 dark:bg-primary-950/10 p-3 rounded-xl max-h-[140px] overflow-y-auto border border-realtime-border/40 dark:border-realtime-darkBorder/40">
                   {emojiList.map(em => (
                     <button
                       key={em}
                       type="button"
                       onClick={() => setIcon(em)}
-                      className={`text-2xl p-2 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition-all ${
-                        icon === em ? 'bg-sky-500/25 border-2 border-sky-500 scale-105' : ''
+                      className={`text-2xl p-2 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all ${
+                        icon === em ? 'bg-primary-500/20 border-2 border-primary-500 scale-105' : ''
                       }`}
                     >
                       {em}
@@ -339,17 +338,17 @@ export default function Categories() {
 
               {/* Color Grid Selector */}
               <div>
-                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-xs font-bold text-realtime-text/75 dark:text-realtime-darkText/75 mb-2 uppercase tracking-wider">
                   Pilih Warna Aset
                 </label>
-                <div className="grid grid-cols-7 gap-3 bg-gray-55 dark:bg-gray-900 p-3.5 rounded-2xl border border-gray-100 dark:border-gray-700">
+                <div className="grid grid-cols-7 gap-3 bg-primary-50/20 dark:bg-primary-950/10 p-3.5 rounded-xl border border-realtime-border/40 dark:border-realtime-darkBorder/40">
                   {colorList.map(col => (
                     <button
                       key={col.hex}
                       type="button"
                       onClick={() => setColor(col.hex)}
                       className={`w-7 h-7 rounded-full transition-all focus:outline-none ${
-                        color === col.hex ? 'ring-4 ring-sky-500/35 border-2 border-white dark:border-gray-800 scale-105' : ''
+                        color === col.hex ? 'ring-4 ring-primary-500/35 border-2 border-white dark:border-realtime-card scale-105' : ''
                       }`}
                       style={{ backgroundColor: col.hex }}
                       title={col.name}
@@ -361,7 +360,7 @@ export default function Categories() {
               {/* Submit button */}
               <button
                 type="submit"
-                className="w-full mt-4 py-3.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-extrabold shadow-lg shadow-sky-500/25 active:scale-98 transition-all text-sm flex items-center justify-center"
+                className="w-full mt-4 py-2.5 px-4 rounded-xl bg-primary-500 hover:bg-primary-600 text-white font-semibold shadow-sm active:scale-[0.99] transition-all text-sm flex items-center justify-center"
               >
                 💾 Simpan Kategori
               </button>

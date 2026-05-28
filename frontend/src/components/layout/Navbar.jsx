@@ -8,16 +8,16 @@ export default function Navbar({ onMenuToggle, title }) {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   return (
-    <header className="h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4 lg:px-8 z-30 sticky top-0">
+    <header className="h-16 bg-white dark:bg-realtime-darkBg border-b border-realtime-border dark:border-realtime-darkBorder flex items-center justify-between px-4 lg:px-8 z-30 sticky top-0">
       {/* Left: Mobile Menu Trigger + Page Title */}
       <div className="flex items-center space-x-3">
         <button
           onClick={onMenuToggle}
-          className="lg:hidden p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          className="lg:hidden p-2 rounded-xl text-realtime-text dark:text-realtime-darkText hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
         >
           🍔
         </button>
-        <h2 className="text-xl font-bold text-gray-800 dark:text-white tracking-tight">{title}</h2>
+        <h2 className="text-xl font-bold text-realtime-text dark:text-realtime-darkText tracking-tight">{title}</h2>
       </div>
 
       {/* Right: Actions & Profile */}
@@ -25,7 +25,7 @@ export default function Navbar({ onMenuToggle, title }) {
         {/* Dark Mode Switcher */}
         <button
           onClick={toggleTheme}
-          className="p-2.5 rounded-xl bg-gray-50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all shadow-sm"
+          className="p-2.5 rounded-xl bg-white dark:bg-realtime-darkBg border border-realtime-border dark:border-realtime-darkBorder text-realtime-text dark:text-realtime-darkText hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all shadow-sm"
           aria-label="Toggle Dark Mode"
         >
           {isDark ? '☀️' : '🌙'}
@@ -37,10 +37,10 @@ export default function Navbar({ onMenuToggle, title }) {
             onClick={() => setShowUserDropdown(!showUserDropdown)}
             className="flex items-center space-x-2 focus:outline-none"
           >
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center text-white font-bold text-base shadow-sm hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-primary-500 flex items-center justify-center text-white font-bold text-base shadow-sm hover:scale-105 transition-transform">
               {user?.name ? user.name[0].toUpperCase() : 'U'}
             </div>
-            <span className="hidden md:inline text-sm font-semibold text-gray-700 dark:text-gray-200">
+            <span className="hidden md:inline text-sm font-semibold text-realtime-text dark:text-realtime-darkText">
               {user?.name}
             </span>
           </button>
@@ -52,10 +52,10 @@ export default function Navbar({ onMenuToggle, title }) {
                 className="fixed inset-0 z-40"
                 onClick={() => setShowUserDropdown(false)}
               />
-              <div className="absolute right-0 mt-2.5 w-56 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 py-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-100">
-                <div className="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
-                  <p className="text-sm font-bold text-gray-900 dark:text-white truncate">{user?.name}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user?.email}</p>
+              <div className="absolute right-0 mt-2.5 w-56 bg-white dark:bg-realtime-darkBg rounded-2xl shadow-xl border border-realtime-border dark:border-realtime-darkBorder py-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-100">
+                <div className="px-4 py-2 border-b border-realtime-border dark:border-realtime-darkBorder">
+                  <p className="text-sm font-bold text-realtime-text dark:text-realtime-darkText truncate">{user?.name}</p>
+                  <p className="text-xs text-realtime-text/60 dark:text-realtime-darkText/60 truncate">{user?.email}</p>
                 </div>
                 <button
                   onClick={() => {

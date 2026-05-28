@@ -7,7 +7,7 @@ export default function PageLayout({ children, title }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-200">
+    <div className="flex min-h-screen bg-realtime-bg dark:bg-realtime-darkBg text-realtime-text dark:text-realtime-darkText transition-colors duration-200">
       {/* Desktop Sidebar */}
       <Sidebar />
 
