@@ -5,6 +5,8 @@ COPY package*.json ./
 # Use high-performance mirror for speed
 RUN npm install --registry=https://registry.npmmirror.com
 COPY . .
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 RUN npm run build
 
 # Run Stage
